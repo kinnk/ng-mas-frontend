@@ -1,0 +1,29 @@
+<div class="form-box">
+  <div class="form-header">
+    <h1>Вход</h1>
+    <p>Система управленческого учета</p>
+  </div>
+    <form nz-form 
+      [formGroup]="validateForm" 
+      class="login-form" 
+      (ngSubmit)="submitForm()">
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Заполните корректно поле Email!">
+        <nz-input-group nzPrefixIcon="user">
+          <input type="email" nz-input formControlName="email" placeholder="Электронная почта" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control nzErrorTip="Заполните поле пароль! Не меньше 4 символов">
+        <nz-input-group nzPrefixIcon="lock">
+          <input type="password" nz-input formControlName="password" placeholder="Пароль" />
+        </nz-input-group>
+      </nz-form-control>
+    </nz-form-item>
+
+    <button  nz-button class="login-form-button login-form-margin" [disabled]="validateForm.invalid">Войти</button>
+  </form>
+</div>

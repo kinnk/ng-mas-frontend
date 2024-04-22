@@ -1,0 +1,26 @@
+<nz-table #filterTable [nzData]="revenuesExpenses" nzTableLayout="fixed">
+  <thead>
+    <tr>
+      <th
+        *ngFor="let column of listOfColumns"
+        [nzSortOrder]="column.sortOrder"
+        [nzSortFn]="column.sortFn"
+        [nzSortDirections]="column.sortDirections"
+        [nzFilterMultiple]="column.filterMultiple"
+        [nzFilters]="column.listOfFilter"
+        [nzFilterFn]="column.filterFn"
+      >
+        {{ column.name }}
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of filterTable.data">
+      <td>{{ data.year }}</td>
+      <td>{{ data.month}}</td>
+      <td>{{ data.category }}</td>
+      <td>{{ data.revenue_amount }}</td>
+      <td>{{ data.expense_amount }}</td>
+    </tr>
+  </tbody>
+</nz-table>

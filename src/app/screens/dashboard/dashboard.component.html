@@ -1,0 +1,33 @@
+<section>
+  <h2>Доходы и расходы</h2>
+  <div class="chart-row">
+    <app-vertical-chart 
+      [view]="[600, 400]"
+      [data]="analyticsData"
+      [showLegend]="false"
+      yAxisLabel="Сумма"
+      xAxisLabel="Прибыль и Убытки"
+      >
+    </app-vertical-chart>
+  </div>
+</section>
+<div class="chart-row">
+  <div>
+    <h4>Доходы по источникам</h4>
+    <app-pie-chart
+      [data]="revenuesBySource"
+      [view]="[400, 400]"
+      [showLegend]="false"
+    >
+    </app-pie-chart>
+  </div>
+  <div>
+    <h4>Расходы по категориям</h4>
+    <app-pie-chart
+      [data]="expensesByCategory"
+      [view]="[400,400]"
+      [showLegend]="false"
+    >
+    </app-pie-chart>
+  </div>
+</div>

@@ -1,0 +1,101 @@
+
+<br />
+<br />
+<nz-table nzTableLayout="fixed" #editRowTable  [nzData]="listOfData" [nzShowPagination]="true">
+  <thead>
+    <tr>
+      <th>Имя</th>
+      <th>Дата назначения</th>
+      <th>Должность</th>
+      <th>Отдел</th>
+      <th>Зарплата</th>
+      <th>
+        <button nz-button (click)="openCreateModal()" nzType="primary" >Добавить</button>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of editRowTable.data" class="editable-row">
+      <td>{{ data.name }}</td>
+      <td>{{ data.hire_date }}</td>
+      <td>{{ data.position }}</td>
+      <td>{{ data.department_name }}</td>
+      <td>{{ data.salary | currency }}</td>
+      <td>
+        <a (click)="openEditModal(data.id)">Редактировать</a>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+<!-- Фон для открытой модалки -->
+<div *ngIf="EditModal || CreateModal " class="overlay"></div>
+<!-- Модалка редактирование сотрудника -->
+<div *ngIf="EditModal" class="edit-modal">
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmitUpdate()">
+    <div>
+      <label for="name">Имя:</label>
+      <input class="form-input" type="text" id="name" formControlName="name">
+    </div>
+    <div>
+      <label for="hire_date">Дата назначения:</label>
+      <input class="form-input" type="date" id="hire_date" formControlName="hire_date">
+    </div>
+    <div>
+      <label for="position">Должность:</label>
+      <select class="form-input" type="text" id="position" formControlName="position">
+        <option value="HR-специалист">HR-специалист</option>
+        <option value="Программист">Программист</option>
+        <option value="Менеджер">Менеджер</option>
+      </select>
+    </div>
+    <div>
+      <label for="salary">Зарплата:</label>
+      <input class="form-input" type="text" id="salary" formControlName="salary">
+    </div>
+    <div>
+      <label for="department_name">Отдел</label>
+      <select class="form-input" type="text" id="department_name" formControlName="department_id">
+        <option *ngFor="let department of listOfDepartments" [value]="department.id">{{department.name}}</option>
+      </select>
+    </div>
+    <div class="form-btn-row">
+      <button class="form-btn" type="submit" [disabled]="employeeForm.invalid">Сохранить</button>
+      <button class="form-btn" (click)="closeModal()">Отмена</button>
+    </div>
+  </form>
+</div>
+<!-- Модалка добавление нового сотрудника -->
+<div *ngIf="CreateModal" class="edit-modal">
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmitCreate()">
+    <div>
+      <label for="name">Имя:</label>
+      <input class="form-input" type="text" id="name" formControlName="name">
+    </div>
+    <div>
+      <label for="hire_date">Дата назначения:</label>
+      <input class="form-input" type="date" id="hire_date" formControlName="hire_date">
+    </div>
+    <div>
+      <label for="position">Должность:</label>
+      <select class="form-input" type="text" id="position" formControlName="position">
+        <option value="HR-специалист">HR-специалист</option>
+        <option value="Программист">Программист</option>
+        <option value="Менеджер">Менеджер</option>
+      </select>
+    </div>
+    <div>
+      <label for="salary">Зарплата:</label>
+      <input class="form-input" type="text" id="salary" formControlName="salary">
+    </div>
+    <div>
+      <label for="department_name">Отдел</label>
+      <select class="form-input" type="text" id="department_name" formControlName="department_id">
+        <option *ngFor="let department of listOfDepartments" [value]="department.id">{{department.name}}</option>
+      </select>
+    </div>
+    <div class="form-btn-row">
+      <button class="form-btn" type="submit" [disabled]="employeeForm.invalid">Сохранить</button>
+      <button class="form-btn" (click)="closeModal()">Отмена</button>
+    </div>
+  </form>
+</div>
